@@ -25,7 +25,10 @@ SECRET_KEY = 'z30qfe8uqfud*zob2qtbd1wedcl!(+%ee!f4k6lb8ac61ty62n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['djangoquickstart-daeperdomocr.c9users.io']
+ALLOWED_HOSTS = ['djangoquickstart-daeperdomocr.c9users.io',
+                 '192.168.99.102',
+                 '192.168.99.101',
+]
 
 
 # Application definition
