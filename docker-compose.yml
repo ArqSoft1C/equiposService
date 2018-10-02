@@ -2,10 +2,22 @@ version: '2'
 services:
   teams_ms:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:4000
     expose:
-      - "8000"
+      - "4000"
     ports:
-      - "8000:8000"
+      - "4000:4000"
     volumes:
         - .:/code
+    links:
+    - teams_db
+
+  teams_db:
+    image: mongo
+    volumes:
+        - "mongodata:/data/db"
+    ports:
+      - "27017:27017"
+
+volumes:
+   mongodata:
