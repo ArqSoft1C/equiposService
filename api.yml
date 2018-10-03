@@ -1,0 +1,217 @@
+#Test with: http://editor.swagger.io/
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Equipos Microservice for Picaditos
+  description: Python
+  license:
+    name: Software Architecture 2018-II
+host: 192.168.99.102:8000
+basePath: /api
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /teams:
+    post:
+      summary: Creates a new team
+      operationId: createTeam
+      parameters:
+        - name: team
+          in: body
+          required: true
+          description: Team Object
+          schema:
+            $ref: '#/definitions/TeamInput'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/SingleTeam'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/GenericError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/GenericError'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/FieldError'
+    get:
+      summary: Returns all teams
+      operationId: getAllTeams
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/TeamsList'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/GenericError'
+
+  /teams/{id}:
+    get:
+      summary: Returns a team with the given id
+      operationId: getTeambyId
+      parameters:
+        - name: id
+          in: path
+          description: The id of the team to be returned
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/SingleTeam'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/GenericError'
+        '400':
+            description: Bad Request
+            schema:
+              $ref: '#/definitions/GenericError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/GenericError'
+
+    put:
+      summary: Updates a team with the given id
+      operationId: updateTeam
+      parameters:
+        - name: id
+          in: path
+          description: The id of the team to be updated
+          required: true
+          type: integer
+        - name: team
+          in: body
+          required: true
+          description: Team Object
+          schema:
+            $ref: '#/definitions/TeamInput'
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/SingleTeam'  
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/GenericError'
+        '400':
+            description: Bad Request
+            schema:
+              $ref: '#/definitions/GenericError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/GenericError'
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/FieldError'
+
+    delete:
+      summary: Deletes a team with the given id
+      operationId: deleteTeam
+      parameters:
+        - name: id
+          in: path
+          description: The id of the team to be deleted
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/GenericError'
+        '400':
+            description: Bad Request
+            schema:
+              $ref: '#/definitions/GenericError'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/GenericError'
+  
+  
+definitions:
+
+  Team:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      calification:
+        type: integer
+      sport:
+        type: string
+      captain_id:
+        type: integer
+      squad:
+        type: array
+        items:
+          type: integer
+          
+  TeamInput:
+    type: object
+    properties:
+      name:
+        type: string
+      sport:
+        type: string
+      captain_id:
+        type: integer
+      squad:
+        type: array
+        items:
+          type: integer
+  
+  TeamsList:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Team'
+          
+  SingleTeam:
+    type: object
+    properties:
+      data:
+        $ref: '#/definitions/Team'
+
+# Errors
+  GenericError:
+    type: object
+    properties:
+      error:
+        type: object
+        properties:
+          detail:
+            type: string
+  FieldError:
+    type: object
+    properties:
+      error:
+        type: object
+        properties:
+          field:
+            type: array
+            items:
+              type: string
