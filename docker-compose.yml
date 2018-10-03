@@ -1,18 +1,18 @@
 version: '2'
 services:
-  teams_ms:
+  equipos_ms:
     build: .
-    command: python manage.py runserver 0.0.0.0:4000
+    command: python manage.py runserver 0.0.0.0:4002
     expose:
-      - "4000"
+      - "4002"
     ports:
-      - "4000:4000"
+      - "4002:4002"
     volumes:
         - .:/code
     links:
-    - teams_db
+    - equipos_db
 
-  teams_db:
+  equipos_db:
     image: mongo
     volumes:
         - "mongodata:/data/db"

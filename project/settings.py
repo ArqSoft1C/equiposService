@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+#mongo
+from mongoengine import connect
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,9 +29,9 @@ SECRET_KEY = 'z30qfe8uqfud*zob2qtbd1wedcl!(+%ee!f4k6lb8ac61ty62n'
 DEBUG = True
 
 ALLOWED_HOSTS = ['djangoquickstart-daeperdomocr.c9users.io',
-                 '192.168.99.102',
-                 '192.168.99.101',
-]
+    '192.168.99.101',
+    '192.168.99.102',
+    'localhost']
 
 
 # Application definition
@@ -41,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_mongoengine',
     'app',
 ]
 
@@ -85,7 +89,12 @@ DATABASES = {
     }
 }
 
-
+connect(
+    'test',
+    host = '192.168.99.102',
+    port = 27017
+    #host = 'daeperdomocr-djangoquickstart-6415201'
+)
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
