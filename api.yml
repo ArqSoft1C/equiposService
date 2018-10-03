@@ -4,11 +4,11 @@ swagger: '2.0'
 info:
   version: 1.0.0
   title: Equipos Microservice for Picaditos
-  description: Python
+  description: Python + MongoDB
   license:
     name: Software Architecture 2018-II
-host: 192.168.99.102:8000
-basePath: /api
+host: 192.168.99.102:4002
+basePath: /
 schemes:
   - http
 consumes:
@@ -16,22 +16,22 @@ consumes:
 produces:
   - application/json
 paths:
-  /teams:
+  /equipos:
     post:
-      summary: Creates a new team
-      operationId: createTeam
+      summary: Creates a new equipo
+      operationId: createequipo
       parameters:
-        - name: team
+        - name: equipo
           in: body
           required: true
-          description: Team Object
+          description: equipo Object
           schema:
-            $ref: '#/definitions/TeamInput'
+            $ref: '#/definitions/equipoInput'
       responses:
         '201':
           description: Created
           schema:
-            $ref: '#/definitions/SingleTeam'
+            $ref: '#/definitions/Singleequipo'
         '400':
           description: Bad Request
           schema:
@@ -40,38 +40,34 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/GenericError'
-        '422':
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/FieldError'
     get:
-      summary: Returns all teams
-      operationId: getAllTeams
+      summary: Returns all equipos
+      operationId: getAllequipos
       responses:
         '200':
           description: Ok
           schema:
-            $ref: '#/definitions/TeamsList'
+            $ref: '#/definitions/equiposList'
         '500':
           description: Internal Server Error
           schema:
             $ref: '#/definitions/GenericError'
 
-  /teams/{id}:
+  /equipos/{id}:
     get:
-      summary: Returns a team with the given id
-      operationId: getTeambyId
+      summary: Returns a equipo with the given id
+      operationId: getequipobyId
       parameters:
         - name: id
           in: path
-          description: The id of the team to be returned
+          description: The id of the equipo to be returned
           required: true
           type: integer
       responses:
         '200':
           description: Ok
           schema:
-            $ref: '#/definitions/SingleTeam'
+            $ref: '#/definitions/Singleequipo'
         '404':
           description: Not Found
           schema:
@@ -86,25 +82,20 @@ paths:
             $ref: '#/definitions/GenericError'
 
     put:
-      summary: Updates a team with the given id
-      operationId: updateTeam
+      summary: Updates a equipo with the given id
+      operationId: updateequipo
       parameters:
         - name: id
           in: path
-          description: The id of the team to be updated
+          description: The id of the equipo to be updated
           required: true
           type: integer
-        - name: team
-          in: body
-          required: true
-          description: Team Object
-          schema:
-            $ref: '#/definitions/TeamInput'
+        
       responses:
         '200':
           description: Ok
           schema:
-            $ref: '#/definitions/SingleTeam'  
+            $ref: '#/definitions/Singleequipo'  
         '404':
           description: Not Found
           schema:
@@ -117,18 +108,14 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/GenericError'
-        '422':
-          description: Unprocessable Entity
-          schema:
-            $ref: '#/definitions/FieldError'
 
     delete:
-      summary: Deletes a team with the given id
-      operationId: deleteTeam
+      summary: Deletes a equipo with the given id
+      operationId: deleteequipo
       parameters:
         - name: id
           in: path
-          description: The id of the team to be deleted
+          description: The id of the equipo to be deleted
           required: true
           type: integer
       responses:
@@ -150,51 +137,52 @@ paths:
   
 definitions:
 
-  Team:
+  equipo:
     type: object
     properties:
       id:
         type: integer
-      name:
+      nombre:
         type: string
-      calification:
+      calificacion:
         type: integer
-      sport:
+      deporte:
         type: string
-      captain_id:
-        type: integer
-      squad:
+      captain_un:
+        type: string
+      miembros:
         type: array
         items:
-          type: integer
+          type: string
           
-  TeamInput:
+  equipoInput:
     type: object
     properties:
-      name:
+      nombre:
         type: string
-      sport:
-        type: string
-      captain_id:
+      calificacion:
         type: integer
-      squad:
+      deporte:
+        type: string
+      captain_un:
+        type: string
+      miembros:
         type: array
         items:
-          type: integer
-  
-  TeamsList:
+          type: string
+  equiposList:
     type: object
     properties:
       data:
         type: array
         items:
-          $ref: '#/definitions/Team'
+          $ref: '#/definitions/equipo'
           
-  SingleTeam:
+  Singleequipo:
     type: object
     properties:
       data:
-        $ref: '#/definitions/Team'
+        $ref: '#/definitions/equipo'
 
 # Errors
   GenericError:
@@ -205,6 +193,7 @@ definitions:
         properties:
           detail:
             type: string
+            
   FieldError:
     type: object
     properties:
