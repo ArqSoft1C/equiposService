@@ -16,7 +16,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /equipos:
+  /equipos/:
     post:
       summary: Creates a new equipo
       operationId: createequipo
@@ -53,7 +53,7 @@ paths:
           schema:
             $ref: '#/definitions/GenericError'
 
-  /equipos/{id}:
+  /equipos/{id}/:
     get:
       summary: Returns a equipo with the given id
       operationId: getequipobyId
@@ -62,7 +62,7 @@ paths:
           in: path
           description: The id of the equipo to be returned
           required: true
-          type: integer
+          type: string
       responses:
         '200':
           description: Ok
@@ -75,7 +75,7 @@ paths:
         '400':
             description: Bad Request
             schema:
-              $ref: '#/definitions/GenericError'
+              $ref: '#/definitions/FieldError'
         '500':
           description: Internal Server Error
           schema:
@@ -89,7 +89,7 @@ paths:
           in: path
           description: The id of the equipo to be updated
           required: true
-          type: integer
+          type: string
         
       responses:
         '200':
@@ -103,7 +103,7 @@ paths:
         '400':
             description: Bad Request
             schema:
-              $ref: '#/definitions/GenericError'
+              $ref: '#/definitions/FieldError'
         '500':
           description: Internal Server Error
           schema:
@@ -117,7 +117,7 @@ paths:
           in: path
           description: The id of the equipo to be deleted
           required: true
-          type: integer
+          type: string
       responses:
         '204':
           description: No Content
@@ -146,9 +146,7 @@ definitions:
         type: string
       calificacion:
         type: integer
-      deporte:
-        type: string
-      captain_un:
+      capitan_un:
         type: string
       miembros:
         type: array
@@ -164,43 +162,29 @@ definitions:
         type: integer
       deporte:
         type: string
-      captain_un:
+      capitan_un:
         type: string
       miembros:
         type: array
         items:
           type: string
   equiposList:
-    type: object
-    properties:
-      data:
-        type: array
-        items:
-          $ref: '#/definitions/equipo'
+    $ref: '#/definitions/equipo'
           
   Singleequipo:
-    type: object
-    properties:
-      data:
-        $ref: '#/definitions/equipo'
+    $ref: '#/definitions/equipo'
 
 # Errors
   GenericError:
     type: object
     properties:
-      error:
-        type: object
-        properties:
-          detail:
-            type: string
+      detail:
+        type: string
             
   FieldError:
     type: object
     properties:
-      error:
-        type: object
-        properties:
-          field:
-            type: array
-            items:
-              type: string
+      field:
+        type: array
+        items:
+          type: string
