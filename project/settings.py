@@ -92,7 +92,7 @@ DATABASES = {
 connect(
     'test',
     host = '192.168.99.102',
-    port = 27017
+    port = 27020
     #host = 'daeperdomocr-djangoquickstart-6415201'
 )
 # Password validation
