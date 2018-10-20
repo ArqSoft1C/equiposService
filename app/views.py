@@ -15,17 +15,17 @@ from rest_framework import status
 
 
 ##mongo
-from app.models import Equipo
+from app.models import Team
 from rest_framework_mongoengine.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from app.serializers import EquipoSerializer
+from app.serializers import TeamSerializer
 
-class EquipoList(ListCreateAPIView):
-    queryset = Equipo.objects.all()
-    serializer_class = EquipoSerializer
+class TeamList(ListCreateAPIView):
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
 
-class EquipoDetail(RetrieveUpdateDestroyAPIView):
-    queryset = Equipo.objects.all()
-    serializer_class = EquipoSerializer
+class TeamDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
 ##end mongo
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -34,6 +34,3 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-
-
-        

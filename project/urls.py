@@ -13,13 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-"""from django.conf.urls import url
-from django.contrib import admin
-
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-]
-"""
 from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
@@ -34,11 +27,10 @@ urlpatterns = [
     url(r'^', include(router.urls)),
 #    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ##mongo
-    url(r'^equipos/$', views.EquipoList.as_view()),
-    url(r'^equipos/(?P<id>[0-9a-z]+)/$', views.EquipoDetail.as_view()),
+    url(r'^equipos/$', views.TeamList.as_view()),
+    url(r'^equipos/(?P<id>[0-9a-z]+)/$', views.TeamDetail.as_view()),
+    url(r'^teams/$', views.TeamList.as_view()),
+    url(r'^teams/(?P<id>[0-9a-z]+)/$', views.TeamDetail.as_view()),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)
-
-
-

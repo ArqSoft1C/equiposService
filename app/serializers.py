@@ -1,13 +1,13 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from .models import Equipo
+from .models import Team
 # Mongo
 from rest_framework_mongoengine import serializers as mongoserializers
 
-class EquipoSerializer(mongoserializers.DocumentSerializer):
+class TeamSerializer(mongoserializers.DocumentSerializer):
     class Meta:
-        model = Equipo
+        model = Team
         fields = '__all__'
 ##End Mongo
 

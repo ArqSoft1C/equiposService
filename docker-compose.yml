@@ -1,6 +1,6 @@
 version: '2'
 services:
-  equipos_ms:
+  teams_ms:
     build: .
     command: python manage.py runserver 0.0.0.0:4002
     expose:
@@ -10,14 +10,15 @@ services:
     volumes:
         - .:/code
     links:
-    - equipos_db
+    - teams_db
 
-  equipos_db:
+  teams_db:
     image: mongo
+    command: mongod --port 27020
     volumes:
         - "mongodata:/data/db"
     ports:
-      - "27017:27017"
+      - "27020:27020"
 
 volumes:
    mongodata:
