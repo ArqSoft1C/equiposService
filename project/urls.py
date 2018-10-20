@@ -29,6 +29,8 @@ urlpatterns = [
 ##mongo
     url(r'^equipos/$', views.TeamList.as_view()),
     url(r'^equipos/(?P<id>[0-9a-z]+)/$', views.TeamDetail.as_view()),
+    url(r'^teams/$', views.TeamList.as_view()),
+    url(r'^teams/(?P<id>[0-9a-z]+)/$', views.TeamDetail.as_view()),
 ]
 
 #urlpatterns = format_suffix_patterns(urlpatterns)

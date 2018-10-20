@@ -90,7 +90,7 @@ DATABASES = {
 }
 
 connect(
-    'test',
+    'teams',
     host = '192.168.99.102',
     port = 27020
     #host = 'daeperdomocr-djangoquickstart-6415201'
