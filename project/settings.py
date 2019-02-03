@@ -38,6 +38,8 @@ ALLOWED_HOSTS = ['djangoquickstart-daeperdomocr.c9users.io',
     '192.168.99.103',
     '35.227.95.3',
     '34.73.188.235',
+    '35.237.125.80',
+    '35.188.245.83',
     'localhost']
 
 
