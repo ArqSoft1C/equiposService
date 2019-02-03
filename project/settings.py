@@ -31,6 +31,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['djangoquickstart-daeperdomocr.c9users.io',
     '192.168.99.101',
     '192.168.99.102',
+    '192.168.99.103',
+    '35.227.95.3',
     'localhost']
 
 
@@ -91,7 +93,7 @@ DATABASES = {
 
 connect(
     'teams',
-    host = '192.168.99.102',
+    host = '35.227.95.3',
     port = 27020
     #host = 'daeperdomocr-djangoquickstart-6415201'
 )
