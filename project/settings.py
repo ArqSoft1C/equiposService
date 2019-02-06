@@ -28,10 +28,7 @@ SECRET_KEY = 'z30qfe8uqfud*zob2qtbd1wedcl!(+%ee!f4k6lb8ac61ty62n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['djangoquickstart-daeperdomocr.c9users.io',
-    'teams-db',
-    'localhost']
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
