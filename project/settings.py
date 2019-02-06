@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import socket 
 
 #mongo
 from mongoengine import connect
@@ -29,17 +28,8 @@ SECRET_KEY = 'z30qfe8uqfud*zob2qtbd1wedcl!(+%ee!f4k6lb8ac61ty62n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-host_name = socket.gethostname() 
-host_ip = socket.gethostbyname(host_name) 
-
 ALLOWED_HOSTS = ['djangoquickstart-daeperdomocr.c9users.io',
-    '192.168.99.101',
-    '192.168.99.102',
-    '192.168.99.103',
-    '35.227.95.3',
-    '34.73.188.235',
-    '35.237.125.80',
-    '35.188.245.83',
+    'teams-db',
     'localhost']
 
 
@@ -100,7 +90,7 @@ DATABASES = {
 
 connect(
     'teams',
-    host = host_ip,
+    host = 'teams-db',
     port = 27020
     #host = 'daeperdomocr-djangoquickstart-6415201'
 )
